@@ -260,7 +260,7 @@ body.ch #c-dot{background:var(--blue)}
 
 <header id="hdr">
   <div class="h-logo">Viral Lead Studio</div>
-  <button data-cal-link="alexeykaledin/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}' class="h-cta">Book a Call →</button>
+  <button    class="h-cta">Book a Call →</button>
 </header>
 
 <div id="nav"></div>
@@ -288,7 +288,7 @@ body.ch #c-dot{background:var(--blue)}
       <span class="hs" style="transition-delay:.62s">Live in 3–5 days, not months.</span>
     </div>
     <div class="hero-btns">
-      <button data-cal-link="alexeykaledin/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}' class="btn-p" id="b1">Book Free Call</button>
+      <button    class="btn-p" id="b1">Book Free Call</button>
       <button class="btn-g" id="b2" onclick="goTo(3)">See Services</button>
     </div>
   </div>
@@ -402,7 +402,7 @@ body.ch #c-dot{background:var(--blue)}
         <div class="pc-feat">$150/mo hosting &amp; care</div>
         <div class="pc-feat">Live in 3–5 days</div>
       </div>
-      <button data-cal-link="alexeykaledin/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}' class="pc-cta">Claim Spot →</button>
+      <button    class="pc-cta">Claim Spot →</button>
     </div>
     <div class="pc feat">
       <div class="pc-badge"><span>Most popular</span></div>
@@ -417,7 +417,7 @@ body.ch #c-dot{background:var(--blue)}
         <div class="pc-feat">Analytics dashboard</div>
         <div class="pc-feat">Priority support</div>
       </div>
-      <button data-cal-link="alexeykaledin/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}' class="pc-cta">Get Started →</button>
+      <button    class="pc-cta">Get Started →</button>
     </div>
     <div class="pc">
       <div class="pc-badge"><span>&nbsp;</span></div>
@@ -432,7 +432,7 @@ body.ch #c-dot{background:var(--blue)}
         <div class="pc-feat">Multi-language support</div>
         <div class="pc-feat">Monthly reports</div>
       </div>
-      <button data-cal-link="alexeykaledin/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}' class="pc-cta">Get Started →</button>
+      <button    class="pc-cta">Get Started →</button>
     </div>
   </div>
   <div class="s-hint">
@@ -466,7 +466,12 @@ body.ch #c-dot{background:var(--blue)}
       </div>
     </div>
     <div>
-      <div style="width:100%;min-height:550px;overflow:scroll" id="my-cal-inline-30min"></div>
+      <div style="background:#fff;border:1px solid rgba(0,0,0,.10);border-radius:4px;padding:clamp(24px,3vw,40px)">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,0,0,.42);margin-bottom:clamp(16px,2.5vh,24px)">// Book a call</div>
+        <div style="font-size:clamp(28px,4vw,52px);font-weight:700;letter-spacing:-.025em;line-height:1;margin-bottom:clamp(14px,2vh,20px)">30-min free<br>consultation.</div>
+        <p style="font-size:clamp(13px,1vw,15px);color:rgba(0,0,0,.42);line-height:1.65;margin-bottom:clamp(20px,3vh,32px)">Tell us about your business. We'll show you a custom demo within 48 hours — no commitment.</p>
+        <a href="https://cal.com/alexeykaledin/30min" target="_blank" style="display:inline-block;background:#000;color:#f0f1fa;font-family:'DM Mono',monospace;font-size:clamp(9px,.78vw,10px);letter-spacing:.16em;text-transform:uppercase;padding:14px 32px;border-radius:100px;text-decoration:none">Book Free Call →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -933,15 +938,6 @@ document.addEventListener('DOMContentLoaded',function(){
 <script>
 
 
-<script type="text/javascript">
-  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-  Cal("init", "30min", {origin:"https://app.cal.com"});
-  Cal.ns["30min"]("inline", {
-    elementOrSelector:"#my-cal-inline-30min",
-    config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
-    calLink: "alexeykaledin/30min",
-  });
-  Cal.ns["30min"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
-</script>
+
 </body>
 </html>
