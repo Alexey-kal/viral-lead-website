@@ -238,69 +238,78 @@ body.ch #c-dot{background:var(--blue)}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
+  /* Make panels scrollable on mobile */
+  .panel{overflow-y:auto;overflow-x:hidden}
+
   /* Stats */
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .stat-cell{border-bottom:1px solid var(--border)}
   .stat-num .sn{font-size:clamp(32px,8vw,60px)}
 
   /* Niches - 1 column */
-  .niches-grid{grid-template-columns:1fr!important}
-  .nc-img{aspect-ratio:16/6}
+  .niches-grid{grid-template-columns:1fr!important;flex:none}
+  .nc-img{aspect-ratio:16/5}
 
-  /* Pricing - stack vertically */
-  .pricing-grid{grid-template-columns:1fr!important}
-  .pc{border-right:none;border-bottom:1px solid var(--border);padding:clamp(16px,3vw,24px)}
+  /* Pricing - stack vertically, MUST show all 3 */
+  .pricing-grid{grid-template-columns:1fr!important;display:flex!important;flex-direction:column!important}
+  .pc{border-right:none;border-bottom:1px solid var(--border);padding:clamp(14px,3vw,22px);flex-shrink:0}
   .pc-price span{font-size:clamp(28px,8vw,48px)}
   .pc-feat{font-size:11px}
+  #p5{justify-content:flex-start;padding:clamp(14px,3vw,22px)}
 
   /* Contact - stack vertically */
   .ct-grid{grid-template-columns:1fr!important;gap:16px}
   .ct-big{font-size:clamp(28px,7vw,48px)}
+  #p6{justify-content:flex-start}
 
   /* Services - smaller text */
   .svc-nm{font-size:clamp(18px,5vw,32px)}
+  #p4{justify-content:flex-start}
 
   /* Triptych */
-  #p5{flex-direction:column}
-  .trip-p:first-child{flex:none;height:45vh}
-  .trip-p{height:22vh}
+  #p5.triptych{flex-direction:column}
+  .trip-p:first-child{flex:none;height:35vh}
+  .trip-p{height:20vh}
 
   /* Sphere - behind content on mobile */
-  #bg{opacity:0.35;z-index:0}
+  #bg{opacity:0.3;z-index:0}
 
   /* Nav dots - hide on mobile */
   #nav{display:none}
+
+  /* Stats panel */
+  #p2{justify-content:flex-start}
 }
 
 @media(max-width:600px){
-  /* Stats - 1 column */
-  .stats-grid{grid-template-columns:1fr}
-  .stat-num .sn{font-size:clamp(36px,10vw,56px)}
-
-  /* Hero */
-  #hero-title{font-size:clamp(36px,10vw,56px)}
-  .hero-sub .hs{font-size:13px}
-  .hero-btns{flex-direction:column;gap:8px;width:100%}
-  .btn-p,.btn-g{text-align:center;padding:12px 20px;font-size:9px}
-
-  /* General padding reduction */
-  .panel{padding:clamp(14px,4vw,20px) clamp(14px,4vw,20px)}
+  /* Panels scrollable */
+  .panel{overflow-y:auto;padding:clamp(14px,4vw,20px)}
   #hdr{padding:14px 16px}
 
-  /* Pricing smaller */
-  .pc-price span{font-size:clamp(32px,9vw,44px)}
+  /* Stats 1 col */
+  .stats-grid{grid-template-columns:1fr}
+
+  /* Hero */
+  #hero-title{font-size:clamp(32px,9vw,48px)}
+  .hero-sub .hs{font-size:13px}
+  .hero-btns{flex-direction:column;gap:8px;width:100%}
+  .btn-p,.btn-g{text-align:center;padding:11px 18px;font-size:9px}
+
+  /* Pricing */
+  .pc-price span{font-size:clamp(30px,9vw,44px)}
   .pc-tier span,.pc-badge span,.pc-sub span{font-size:9px}
+  .pc-cta{padding:10px;font-size:8px}
 
   /* Contact */
-  .ct-big{font-size:clamp(28px,8vw,40px)!important}
+  .ct-big{font-size:clamp(26px,8vw,38px)!important}
   .ct-body{font-size:13px}
   .f-in,.f-ta{font-size:14px;padding:10px 12px}
 
-  /* Tag smaller */
+  /* Tag */
   .tag{font-size:8px}
 
-  /* Sphere smaller opacity */
-  #bg{opacity:0.25}
+  /* Sphere */
+  #bg{opacity:0.2}
 }
 </style>
 </head>
