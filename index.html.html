@@ -240,12 +240,24 @@ body.ch #c-dot{background:var(--blue)}
 @media(max-width:900px){
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .stat-cell{border-bottom:1px solid var(--border)}
+  .niches-grid{grid-template-columns:1fr!important}
+  .nc-img{aspect-ratio:16/7}
   .pricing-grid{grid-template-columns:1fr}
   .pc{border-right:none;border-bottom:1px solid var(--border)}
-  .ct-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(24px,4vw,48px);margin-top:clamp(16px,2.5vh,28px);align-items:start}
+  .ct-grid{grid-template-columns:1fr!important;gap:clamp(16px,3vh,24px)}
   #p5{flex-direction:column}
   .trip-p:first-child{flex:none;height:45vh}
   .trip-p{height:22vh}
+  #bg{opacity:.5}
+}
+@media(max-width:600px){
+  .stats-grid{grid-template-columns:1fr}
+  .niches-grid{grid-template-columns:1fr!important}
+  .hero-btns{flex-direction:column;gap:8px}
+  .ct-grid{grid-template-columns:1fr!important}
+  #bg{opacity:.4}
+  .panel{padding:clamp(16px,4vw,24px)}
+  #hdr{padding:clamp(14px,3vw,20px) clamp(16px,4vw,24px)}
 }
 @media(max-width:600px){
   .stats-grid{grid-template-columns:1fr}
