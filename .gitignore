@@ -1,0 +1,18 @@
+# Dependencies & build output
+node_modules/
+dist/
+
+# Environment & logs
+.env
+.env.*
+*.log
+
+# OS & editor
+.DS_Store
+Thumbs.db
+
+# Installers (not part of the site)
+*.exe
+
+# Kings Cut build output only (compressed media in assets/ is committed for Vercel)
+kings-cut/dist/

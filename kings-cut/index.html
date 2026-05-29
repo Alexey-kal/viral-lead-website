@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KINGS CUT — Montreal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=DM+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div id="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Preloader -->
+  <div id="preloader" aria-live="polite" aria-busy="true">
+    <div class="preloader-split preloader-split--left"></div>
+    <div class="preloader-split preloader-split--right"></div>
+    <div class="preloader-center">
+      <h1 class="preloader-logo" id="preloader-logo">KINGS CUT</h1>
+      <div class="preloader-count" id="preloader-count">0</div>
+      <div class="preloader-bar">
+        <div class="preloader-bar-fill" id="preloader-bar-fill"></div>
+      </div>
+      <p class="preloader-tag">Montreal — Est. 2012</p>
+    </div>
+  </div>
+
+  <!-- Site -->
+  <div id="site" class="is-loading">
+
+    <header class="nav">
+      <a href="#" class="nav-logo magnetic" data-cursor="link">Kings Cut</a>
+      <nav class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#statement" data-cursor="link">About</a></li>
+          <li><a href="#services" data-cursor="link">Services</a></li>
+          <li><a href="#craft" data-cursor="link">Craft</a></li>
+        </ul>
+        <a href="#book" class="nav-cta magnetic" data-cursor="link">Book Now</a>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- Hero -->
+      <section class="hero" id="hero">
+        <video class="hero-video" muted loop playsinline preload="metadata" poster="/barber-shave.jpg">
+          <source src="/barber-hero.mp4" type="video/mp4">
+        </video>
+        <div class="hero-grain"></div>
+        <div class="hero-vignette"></div>
+        <div class="hero-fade"></div>
+
+        <div class="hero-inner">
+          <p class="label hero-label">Premier Barbershop — Montreal, QC</p>
+          <h1 class="display hero-title">
+            <span class="line"><span class="word">We</span> <span class="word">Cut</span></span>
+            <span class="line line--accent"><span class="word">Kings.</span></span>
+          </h1>
+          <div class="hero-foot">
+            <p class="hero-desc">Where precision meets craft. Every cut a statement. Every shave a ritual.</p>
+            <a href="#book" class="hero-cta magnetic" data-cursor="link">
+              <span class="hero-cta-circle">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+              <span class="label">Reserve Now</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="scroll-hint label">
+          <span>Scroll</span>
+          <span class="scroll-hint-line"></span>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-num" data-count="12" data-suffix="+">0</span>
+            <span class="label">Years Open</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-num" data-count="8">0</span>
+            <span class="label">Master Barbers</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-num" data-count="4800" data-suffix="+">0</span>
+            <span class="label">Happy Clients</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-num" data-count="4.9" data-prefix="★">0</span>
+            <span class="label">Google Rating</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Marquee -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>Precision Cuts</span><span class="marquee-dot">✦</span>
+          <span>Hot Towel Shaves</span><span class="marquee-dot">✦</span>
+          <span>Beard Sculpting</span><span class="marquee-dot">✦</span>
+          <span>Montreal, QC</span><span class="marquee-dot">✦</span>
+          <span>Walk-Ins Welcome</span><span class="marquee-dot">✦</span>
+          <span>Precision Cuts</span><span class="marquee-dot">✦</span>
+          <span>Hot Towel Shaves</span><span class="marquee-dot">✦</span>
+          <span>Beard Sculpting</span><span class="marquee-dot">✦</span>
+          <span>Montreal, QC</span><span class="marquee-dot">✦</span>
+          <span>Walk-Ins Welcome</span><span class="marquee-dot">✦</span>
+        </div>
+        <div class="marquee-track marquee-track--reverse">
+          <span>Est. 2012</span><span class="marquee-dot">✦</span>
+          <span>Straight Razor</span><span class="marquee-dot">✦</span>
+          <span>Skin Fades</span><span class="marquee-dot">✦</span>
+          <span>Kings Cut</span><span class="marquee-dot">✦</span>
+          <span>Premium Grooming</span><span class="marquee-dot">✦</span>
+          <span>Est. 2012</span><span class="marquee-dot">✦</span>
+          <span>Straight Razor</span><span class="marquee-dot">✦</span>
+          <span>Skin Fades</span><span class="marquee-dot">✦</span>
+          <span>Kings Cut</span><span class="marquee-dot">✦</span>
+          <span>Premium Grooming</span><span class="marquee-dot">✦</span>
+        </div>
+      </div>
+
+      <!-- Statement -->
+      <section class="section statement" id="statement">
+        <p class="label reveal">Bold Craft, Brought to Life</p>
+        <h2 class="display display--section statement-title">
+          <span class="w"><span class="wi">We</span></span>
+          <span class="w"><span class="wi">combine</span></span>
+          <span class="w"><span class="wi">tradition,</span></span>
+          <span class="w w--accent"><span class="wi">precision,</span></span>
+          <span class="w"><span class="wi">and</span></span>
+          <span class="w"><span class="wi">craft</span></span>
+          <span class="w"><span class="wi">to</span></span>
+          <span class="w"><span class="wi">create</span></span>
+          <span class="w"><span class="wi">grooming</span></span>
+          <span class="w"><span class="wi">experiences</span></span>
+          <span class="w"><span class="wi">that</span></span>
+          <span class="w"><span class="wi">feel</span></span>
+          <span class="w w--accent"><span class="wi">visually</span></span>
+          <span class="w w--accent"><span class="wi">striking</span></span>
+          <span class="w"><span class="wi">and</span></span>
+          <span class="w"><span class="wi">technically</span></span>
+          <span class="w"><span class="wi">seamless.</span></span>
+        </h2>
+        <div class="statement-link-wrap reveal">
+          <a href="#services" class="text-link magnetic" data-cursor="link">Our Services</a>
+        </div>
+      </section>
+
+      <!-- Gallery — Lusion-style featured work grid -->
+      <section class="gallery-section" id="gallery">
+        <div class="gl-grid">
+          <article class="gl-card gl-card--1" data-cursor="link">
+            <div class="gl-card-inner">
+              <img class="gl-img" src="/barber-shave.jpg" alt="The Royal Shave" loading="lazy">
+            </div>
+            <div class="gl-card-label">
+              <span class="gl-num">01</span>
+              <span class="gl-name">The Royal Shave</span>
+            </div>
+          </article>
+          <article class="gl-card gl-card--2" data-cursor="link">
+            <div class="gl-card-inner">
+              <img class="gl-img" src="/barber-pole.jpg" alt="The Symbol" loading="lazy">
+            </div>
+            <div class="gl-card-label">
+              <span class="gl-num">02</span>
+              <span class="gl-name">The Symbol</span>
+            </div>
+          </article>
+          <article class="gl-card gl-card--3" data-cursor="link">
+            <div class="gl-card-inner">
+              <img class="gl-img" src="/barber-shop.jpg" alt="The Shop" loading="lazy">
+            </div>
+            <div class="gl-card-label">
+              <span class="gl-num">03</span>
+              <span class="gl-name">The Shop</span>
+            </div>
+          </article>
+          <article class="gl-card gl-card--4" data-cursor="link">
+            <div class="gl-card-inner">
+              <img class="gl-img" src="/barber-tools.jpg" alt="The Arsenal" loading="lazy">
+            </div>
+            <div class="gl-card-label">
+              <span class="gl-num">04</span>
+              <span class="gl-name">The Arsenal</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section class="section services" id="services">
+        <p class="label reveal">What We Do</p>
+        <h2 class="display display--section reveal">Our <em>Services</em></h2>
+        <div class="services-list">
+          <article class="service-row reveal magnetic" data-img="/barber-shave.jpg" data-cursor="link">
+            <span class="label">01</span>
+            <h3 class="service-name">Classic Cut</h3>
+            <span class="label service-meta">45 min · Hair</span>
+            <span class="service-price">$45</span>
+          </article>
+          <article class="service-row reveal magnetic" data-img="/barber-tools.jpg" data-cursor="link">
+            <span class="label">02</span>
+            <h3 class="service-name">Royal Shave</h3>
+            <span class="label service-meta">60 min · Shave</span>
+            <span class="service-price">$65</span>
+          </article>
+          <article class="service-row reveal magnetic" data-img="/barber-shop.jpg" data-cursor="link">
+            <span class="label">03</span>
+            <h3 class="service-name">Beard Sculpt</h3>
+            <span class="label service-meta">30 min · Beard</span>
+            <span class="service-price">$35</span>
+          </article>
+          <article class="service-row reveal magnetic" data-img="/barber-pole.jpg" data-cursor="link">
+            <span class="label">04</span>
+            <h3 class="service-name">The Full Works</h3>
+            <span class="label service-meta">90 min · Premium</span>
+            <span class="service-price">$120</span>
+          </article>
+          <article class="service-row reveal magnetic" data-img="/barber-shave.jpg" data-cursor="link">
+            <span class="label">05</span>
+            <h3 class="service-name">King's Pass</h3>
+            <span class="label service-meta">Monthly · Members</span>
+            <span class="service-price">$99/mo</span>
+          </article>
+        </div>
+      </section>
+
+      <div id="service-preview" aria-hidden="true">
+        <img src="/barber-shave.jpg" alt="">
+      </div>
+
+      <!-- Pinned phrase -->
+      <section class="pin-section" id="pin">
+        <div class="pin-spacer">
+          <div class="pin-sticky">
+            <span class="pin-counter" id="pin-counter" aria-live="polite">00 / 06</span>
+            <div class="pin-phrase" id="pin-phrase">
+              <div class="pin-row pin-row--left"><span class="pw">Every</span></div>
+              <div class="pin-row pin-row--right"><span class="pw">king</span></div>
+              <div class="pin-row pin-row--left"><span class="pw">deserves</span></div>
+              <div class="pin-row pin-row--right"><span class="pw">a</span></div>
+              <div class="pin-row pin-row--left"><span class="pw">unique</span></div>
+              <div class="pin-row pin-row--right"><span class="pw pw--accent">haircut</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Craft video -->
+      <section class="craft" id="craft">
+        <video class="craft-video" muted loop playsinline preload="none">
+          <source src="/barber-hero.mp4" type="video/mp4">
+        </video>
+        <div class="craft-overlay"></div>
+        <div class="craft-content">
+          <p class="label reveal">The Craft</p>
+          <h2 class="display display--section reveal">Precision Is <em>Everything</em></h2>
+          <p class="craft-body reveal">Every line, every edge, every fade is done with intention. Our barbers train for years before they touch a client's hair. That is the Kings Cut standard.</p>
+        </div>
+      </section>
+
+      <!-- Book CTA -->
+      <section class="section book" id="book">
+        <p class="label reveal">Ready to look like royalty?</p>
+        <h2 class="display display--cta reveal">Let's Work<br><span>Together.</span></h2>
+        <a href="tel:+15145550147" class="btn magnetic reveal" data-cursor="link">Reserve Your Chair</a>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="footer-brand">
+        <p class="display display--footer">Kings <span>Cut</span></p>
+        <p class="body">Montreal's premier barbershop. Precision cuts, hot towel shaves, beard sculpting since 2012.</p>
+      </div>
+      <div class="footer-col">
+        <p class="label">Navigate</p>
+        <ul>
+          <li><a href="#statement" data-cursor="link">About</a></li>
+          <li><a href="#services" data-cursor="link">Services</a></li>
+          <li><a href="#craft" data-cursor="link">Craft</a></li>
+          <li><a href="#book" data-cursor="link">Book Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="label">Contact</p>
+        <ul>
+          <li><a href="#" data-cursor="link">1247 Ste-Catherine O.</a></li>
+          <li><a href="#" data-cursor="link">Montréal, QC</a></li>
+          <li><a href="tel:+15145550147" data-cursor="link">+1 (514) 555-0147</a></li>
+          <li><a href="mailto:info@kingscut.ca" data-cursor="link">info@kingscut.ca</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p class="label">© 2026 Kings Cut Barbershop</p>
+        <div class="footer-social">
+          <a href="#" data-cursor="link">Instagram</a>
+          <a href="#" data-cursor="link">Facebook</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

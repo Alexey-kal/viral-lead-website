@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm install --prefix kings-cut",
+  "buildCommand": "npm run build --prefix kings-cut",
+  "outputDirectory": "kings-cut/dist"
+}

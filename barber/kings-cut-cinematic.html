@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KINGS CUT — Montreal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+:root{
+  --blue:#0047ff;
+  --blue2:#0035cc;
+  --white:#f5f5f3;
+  --ink:#09090b;
+  --gray:#6b6b6b;
+  --serif:'Playfair Display',serif;
+  --sans:'DM Sans',sans-serif;
+  --mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{overflow:hidden;height:100%;}
+body{background:var(--white);color:var(--ink);font-family:var(--sans);cursor:none;overflow:hidden;height:100vh;}
+
+/* ── SMOOTH SCROLL ── */
+#s{position:fixed;top:0;left:0;width:100%;will-change:transform;}
+
+/* ── CURSOR ── */
+#cd{position:fixed;width:8px;height:8px;background:var(--blue);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cr{position:fixed;width:44px;height:44px;border:1px solid rgba(0,71,255,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+.tr{position:fixed;border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);background:var(--blue);}
+body.hov #cd{width:12px;height:12px;}
+body.hov #cr{width:64px;height:64px;border-color:var(--blue);}
+
+/* ── LOADER ── */
+#ldr{position:fixed;inset:0;z-index:9000;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;}
+.ldr-split{position:absolute;top:0;bottom:0;width:50%;background:var(--ink);}
+.ldr-split.l{left:0;}
+.ldr-split.r{right:0;}
+#ldr-logo{position:relative;z-index:1;font-family:var(--serif);font-weight:900;font-size:clamp(2.5rem,7vw,6rem);color:var(--white);letter-spacing:.25em;text-transform:uppercase;opacity:0;animation:lfade .8s .2s forwards;}
+#ldr-num{position:relative;z-index:1;font-family:var(--mono);font-size:5rem;color:var(--blue);margin-top:1rem;opacity:0;animation:lfade .5s .3s forwards;}
+#ldr-line{position:relative;z-index:1;width:200px;height:1px;background:rgba(255,255,255,.1);margin-top:1.5rem;overflow:hidden;opacity:0;animation:lfade .5s .4s forwards;}
+#ldr-prog{height:100%;width:0;background:var(--blue);}
+#ldr-tag{position:relative;z-index:1;font-family:var(--mono);font-size:.55rem;letter-spacing:.3em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-top:1rem;opacity:0;animation:lfade .5s .5s forwards;}
+@keyframes lfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:2rem 5rem;display:flex;align-items:center;justify-content:space-between;}
+.nl{font-family:var(--serif);font-weight:900;font-size:1.1rem;letter-spacing:.2em;color:var(--white);text-decoration:none;text-transform:uppercase;mix-blend-mode:difference;}
+.nr{display:flex;align-items:center;gap:2.5rem;}
+.nlinks{display:flex;gap:2rem;list-style:none;}
+.nlinks a{font-family:var(--mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--white);text-decoration:none;opacity:.5;transition:opacity .3s;mix-blend-mode:difference;}
+.nlinks a:hover{opacity:1;}
+.nbook{font-family:var(--mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--white);background:var(--blue);padding:.6rem 1.5rem;text-decoration:none;border-radius:100px;transition:background .3s;}
+.nbook:hover{background:var(--blue2);}
+
+/* ── HERO — CINEMATIC VIDEO ── */
+#hero{position:relative;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
+#hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.45) saturate(1.1) contrast(1.05);}
+#hero-grain{position:absolute;inset:0;z-index:1;opacity:.4;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");}
+#hero-vignette{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.7) 100%);}
+#hero-bottom{position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(9,9,11,.95) 0%,transparent 100%);z-index:1;}
+.h-content{position:relative;z-index:2;padding:0 5rem 5rem;}
+.h-tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem;opacity:0;}
+.h-tag::before{content:'';width:20px;height:1px;background:var(--blue);}
+.h-title{font-family:var(--serif);font-weight:900;line-height:.88;letter-spacing:-.02em;color:var(--white);}
+.h-title-big{font-size:clamp(5rem,15vw,16rem);display:block;overflow:hidden;}
+.h-title-word{display:inline-block;transform:translateY(115%);}
+.h-bottom{display:flex;align-items:flex-end;justify-content:space-between;margin-top:2.5rem;opacity:0;}
+.h-desc{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:rgba(255,255,255,.55);line-height:1.75;max-width:360px;}
+.h-actions{display:flex;flex-direction:column;align-items:flex-end;gap:1rem;}
+.h-cta{display:flex;align-items:center;gap:1rem;text-decoration:none;transition:gap .3s;}
+.h-cta:hover{gap:1.5rem;}
+.h-cta-circle{width:52px;height:52px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .4s cubic-bezier(.16,1,.3,1),background .3s;}
+.h-cta:hover .h-cta-circle{transform:scale(1.1);background:var(--blue2);}
+.h-cta-circle svg{width:18px;height:18px;stroke:white;stroke-width:1.5;fill:none;}
+.h-cta-txt{font-family:var(--mono);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.7);}
+.h-scroll{position:absolute;right:5rem;top:50%;transform:translateY(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;}
+.h-scroll span{font-family:var(--mono);font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);writing-mode:vertical-rl;}
+.h-scroll-bar{width:1px;height:50px;background:linear-gradient(to bottom,rgba(0,71,255,.8),transparent);animation:scbar 2s ease-in-out infinite;}
+@keyframes scbar{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(.6)}}
+
+/* stats strip */
+.h-stats{position:absolute;bottom:0;left:0;right:0;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.07);}
+.h-stat{padding:1.2rem 2rem;border-right:1px solid rgba(255,255,255,.07);}
+.h-stat:last-child{border-right:none;}
+.sn{font-family:var(--serif);font-weight:900;font-size:1.8rem;color:var(--blue);line-height:1;}
+.sl{font-family:var(--mono);font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:.2rem;}
+
+/* ── MARQUEE ── */
+.mq-wrap{overflow:hidden;border-top:1px solid rgba(0,0,0,.06);}
+.mq-track{display:flex;width:max-content;padding:.85rem 0;animation:mq 22s linear infinite;}
+.mq-track.r{animation-direction:reverse;border-top:1px solid rgba(0,0,0,.04);}
+.mq-track:hover{animation-play-state:paused;}
+.mq-i{font-family:var(--serif);font-style:italic;font-size:1.6rem;color:var(--ink);padding:0 2rem;white-space:nowrap;opacity:.12;transition:opacity .3s,color .3s;}
+.mq-i:hover{opacity:1;color:var(--blue);}
+.mq-dot{color:var(--blue);margin:0 .8rem;font-style:normal;opacity:1;}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ── STATEMENT ── */
+#statement{padding:12rem 5rem;position:relative;}
+.stmt-eye{font-family:var(--mono);font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:var(--blue);margin-bottom:3rem;display:flex;align-items:center;gap:.8rem;}
+.stmt-eye::before{content:'';width:18px;height:1px;background:var(--blue);}
+.stmt-big{font-family:var(--serif);font-weight:900;font-size:clamp(2.2rem,5vw,5.5rem);line-height:1.1;letter-spacing:-.02em;color:var(--ink);max-width:1000px;}
+.stmt-big .w{display:inline-block;overflow:hidden;margin-right:.25em;}
+.stmt-big .wi{display:inline-block;transform:translateY(110%);}
+.stmt-big em{color:var(--blue);font-style:normal;}
+.stmt-right{display:flex;justify-content:flex-end;margin-top:4rem;}
+.stmt-link{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:.8rem;transition:color .3s,gap .3s;}
+.stmt-link::after{content:'';width:28px;height:1px;background:currentColor;transition:width .3s;}
+.stmt-link:hover{color:var(--blue);gap:1.2rem;}
+.stmt-link:hover::after{width:48px;}
+
+/* ── PHOTO GRID ── */
+#photos{padding:0 5rem 8rem;display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:auto auto;gap:1.5rem;}
+.pg-item{position:relative;overflow:hidden;}
+.pg-item:nth-child(1){grid-row:span 2;height:75vh;}
+.pg-item:nth-child(2){height:35vh;}
+.pg-item:nth-child(3){height:38vh;}
+.pg-item img{width:100%;height:100%;object-fit:cover;filter:saturate(.9);transition:transform .9s cubic-bezier(.16,1,.3,1),filter .9s;}
+.pg-item:hover img{transform:scale(1.04);filter:saturate(1.1);}
+.pg-label{position:absolute;bottom:1.5rem;left:1.5rem;font-family:var(--mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:white;background:rgba(0,71,255,.8);padding:.4rem .8rem;}
+.pg-num{position:absolute;top:1.2rem;right:1.2rem;font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;color:rgba(255,255,255,.4);}
+
+/* ── SERVICES ── */
+#services{background:var(--ink);padding:10rem 5rem;}
+.sv-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:5rem;}
+.sv-eye{font-family:var(--mono);font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(0,71,255,.7);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;}
+.sv-eye::before{content:'';width:18px;height:1px;background:rgba(0,71,255,.7);}
+.sv-title{font-family:var(--serif);font-weight:900;font-size:clamp(2.5rem,5vw,5rem);color:var(--white);letter-spacing:-.02em;line-height:1;}
+.sv-title em{color:var(--blue);font-style:normal;}
+.sv-rows{}
+.sv-row{display:flex;align-items:center;padding:2.2rem 0;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;cursor:none;transition:padding-left .4s cubic-bezier(.16,1,.3,1);}
+.sv-row::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--blue);transition:width .6s cubic-bezier(.16,1,.3,1);}
+.sv-row:hover{padding-left:2rem;}
+.sv-row:hover::after{width:100%;}
+.sv-n{font-family:var(--mono);font-size:.52rem;letter-spacing:.18em;color:rgba(0,71,255,.4);min-width:56px;}
+.sv-name{font-family:var(--serif);font-weight:700;font-size:clamp(2rem,4.5vw,4.5rem);color:var(--white);flex:1;line-height:1;letter-spacing:-.02em;transition:color .3s;}
+.sv-row:hover .sv-name{color:var(--blue);}
+.sv-tags{display:flex;gap:.4rem;margin-right:2rem;}
+.sv-tag{font-family:var(--mono);font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,.1);padding:.22rem .55rem;color:rgba(255,255,255,.3);border-radius:100px;transition:border-color .3s,color .3s;}
+.sv-row:hover .sv-tag{border-color:rgba(0,71,255,.4);color:rgba(0,71,255,.7);}
+.sv-price{font-family:var(--serif);font-weight:900;font-size:1.8rem;color:var(--blue);min-width:90px;text-align:right;}
+#sv-float{position:fixed;width:260px;height:180px;pointer-events:none;z-index:400;opacity:0;transition:opacity .4s;overflow:hidden;}
+#sv-float img{width:100%;height:100%;object-fit:cover;}
+
+/* ── PINNED PHRASE ── */
+#pinned{position:relative;}
+.pin-outer{height:250vh;}
+.pin-inner{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.pin-text{font-family:var(--serif);font-weight:900;font-size:clamp(3.5rem,8vw,9rem);line-height:1.05;text-align:center;max-width:1100px;padding:0 4rem;letter-spacing:-.02em;}
+.pw{display:inline-block;opacity:.08;transition:opacity .4s,color .4s;margin:0 .2em;}
+.pw.on{opacity:1;}
+.pw.blue{color:var(--blue);}
+
+/* ── VIDEO SECTION ── */
+#vid-section{position:relative;height:80vh;overflow:hidden;}
+#vid2{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.4) saturate(1.2);}
+.vid-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(9,9,11,.9) 0%,rgba(9,9,11,.3) 60%,transparent 100%);}
+.vid-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 5rem;max-width:650px;}
+.vid-eye{font-family:var(--mono);font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:rgba(0,71,255,.7);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem;}
+.vid-eye::before{content:'';width:18px;height:1px;background:rgba(0,71,255,.7);}
+.vid-title{font-family:var(--serif);font-weight:900;font-size:clamp(2.5rem,5vw,5rem);color:var(--white);line-height:1;letter-spacing:-.02em;margin-bottom:1.5rem;}
+.vid-title em{color:var(--blue);font-style:normal;}
+.vid-body{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:rgba(255,255,255,.55);line-height:1.8;}
+
+/* ── BIG CTA ── */
+#bigcta{padding:14rem 5rem;text-align:center;position:relative;overflow:hidden;border-top:1px solid rgba(0,0,0,.06);}
+.bc-ghost{position:absolute;bottom:-5rem;left:0;right:0;font-family:var(--serif);font-weight:900;font-size:22vw;color:rgba(0,71,255,.04);text-align:center;line-height:1;pointer-events:none;letter-spacing:-.02em;}
+.bc-pre{font-family:var(--mono);font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gray);margin-bottom:2rem;}
+.bc-title{font-family:var(--serif);font-weight:900;font-size:clamp(4rem,11vw,12rem);line-height:.9;color:var(--ink);letter-spacing:-.03em;margin-bottom:3rem;}
+.bc-title span{color:var(--blue);}
+.bc-btn{display:inline-flex;align-items:center;gap:1rem;background:var(--blue);color:var(--white);font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;padding:1.1rem 2.8rem;text-decoration:none;border-radius:100px;transition:background .3s,transform .3s,gap .3s;}
+.bc-btn::after{content:'→';}
+.bc-btn:hover{background:var(--ink);transform:scale(1.04);gap:1.5rem;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid rgba(0,0,0,.08);padding:5rem 5rem 3rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;}
+.ft-brand{font-family:var(--serif);font-weight:900;font-size:1.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:.8rem;}
+.ft-brand span{color:var(--blue);}
+.ft-desc{font-family:var(--sans);font-size:.9rem;color:var(--gray);line-height:1.75;max-width:240px;}
+.ft-col-t{font-family:var(--mono);font-size:.52rem;letter-spacing:.25em;text-transform:uppercase;color:var(--blue);margin-bottom:1.2rem;}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+.ft-links a{font-family:var(--sans);font-size:.88rem;color:var(--gray);text-decoration:none;transition:color .3s;}
+.ft-links a:hover{color:var(--blue);}
+.ft-bot{grid-column:span 4;border-top:1px solid rgba(0,0,0,.06);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;}
+.ft-copy{font-family:var(--mono);font-size:.52rem;letter-spacing:.08em;color:rgba(0,0,0,.25);}
+.ft-soc{display:flex;gap:1.5rem;}
+.ft-soc a{font-family:var(--mono);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color .3s;}
+.ft-soc a:hover{color:var(--blue);}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(44px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1);}
+.rv.on{opacity:1;transform:none;}
+.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}.d4{transition-delay:.48s}
+</style>
+</head>
+<body>
+
+<div id="cd"></div>
+<div id="cr"></div>
+
+<!-- LOADER -->
+<div id="ldr">
+  <div class="ldr-split l"></div>
+  <div class="ldr-split r"></div>
+  <div id="ldr-logo">Kings Cut</div>
+  <div id="ldr-num">0</div>
+  <div id="ldr-line"><div id="ldr-prog"></div></div>
+  <div id="ldr-tag">Montreal — Est. 2012</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nl">Kings Cut</a>
+  <div class="nr">
+    <ul class="nlinks">
+      <li><a href="#statement">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#vid-section">Gallery</a></li>
+    </ul>
+    <a href="#bigcta" class="nbook magnetic">Book Now</a>
+  </div>
+</nav>
+
+<!-- SCROLL CONTAINER -->
+<div id="s">
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <video id="hero-video" autoplay muted loop playsinline>
+    <source src="barber-hero.mp4" type="video/mp4">
+  </video>
+  <div id="hero-grain"></div>
+  <div id="hero-vignette"></div>
+  <div id="hero-bottom"></div>
+
+  <div class="h-content">
+    <p class="h-tag">Premier Barbershop — Montreal, QC</p>
+    <h1 class="h-title">
+      <span class="h-title-big"><span class="h-title-word">We</span> <span class="h-title-word">Cut</span></span>
+      <span class="h-title-big" style="color:var(--blue)"><span class="h-title-word">Kings.</span></span>
+    </h1>
+    <div class="h-bottom">
+      <p class="h-desc">Where precision meets craft. Every cut a statement. Every shave a ritual. Montreal's finest since 2012.</p>
+      <div class="h-actions">
+        <a href="#bigcta" class="h-cta magnetic">
+          <div class="h-cta-circle">
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+          </div>
+          <span class="h-cta-txt">Reserve Now</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="h-scroll"><span>Scroll</span><div class="h-scroll-bar"></div></div>
+
+  <div class="h-stats">
+    <div class="h-stat"><div class="sn" data-target="12" data-suffix="+">0</div><div class="sl">Years Open</div></div>
+    <div class="h-stat"><div class="sn" data-target="8">0</div><div class="sl">Master Barbers</div></div>
+    <div class="h-stat"><div class="sn" data-target="4800" data-suffix="+">0</div><div class="sl">Happy Clients</div></div>
+    <div class="h-stat"><div class="sn" data-target="4.9" data-prefix="★">0</div><div class="sl">Google Rating</div></div>
+  </div>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="mq-wrap">
+  <div class="mq-track">
+    <span class="mq-i">Precision Cuts<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Hot Towel Shaves<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Beard Sculpting<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Montreal, QC<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Walk-Ins Welcome<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Precision Cuts<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Hot Towel Shaves<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Beard Sculpting<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Montreal, QC<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Walk-Ins Welcome<span class="mq-dot">✦</span></span>
+  </div>
+  <div class="mq-track r">
+    <span class="mq-i">Est. 2012<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Straight Razor<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Skin Fades<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Kings Cut<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Premium Grooming<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Est. 2012<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Straight Razor<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Skin Fades<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Kings Cut<span class="mq-dot">✦</span></span>
+    <span class="mq-i">Premium Grooming<span class="mq-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- ══ STATEMENT ══ -->
+<section id="statement">
+  <div class="stmt-eye rv">Bold Craft, Brought to Life</div>
+  <p class="stmt-big">
+    <span class="w"><span class="wi">We</span></span>
+    <span class="w"><span class="wi">combine</span></span>
+    <span class="w"><span class="wi">tradition,</span></span>
+    <span class="w blue"><span class="wi" style="color:var(--blue)">precision,</span></span>
+    <span class="w"><span class="wi">and</span></span>
+    <span class="w"><span class="wi">craft</span></span>
+    <span class="w"><span class="wi">to</span></span>
+    <span class="w"><span class="wi">create</span></span>
+    <span class="w"><span class="wi">grooming</span></span>
+    <span class="w"><span class="wi">experiences</span></span>
+    <span class="w"><span class="wi">that</span></span>
+    <span class="w"><span class="wi">feel</span></span>
+    <span class="w blue"><span class="wi" style="color:var(--blue)">visually</span></span>
+    <span class="w blue"><span class="wi" style="color:var(--blue)">striking</span></span>
+    <span class="w"><span class="wi">and</span></span>
+    <span class="w"><span class="wi">technically</span></span>
+    <span class="w"><span class="wi">seamless.</span></span>
+  </p>
+  <div class="stmt-right">
+    <a href="#services" class="stmt-link rv d2">Our Services</a>
+  </div>
+</section>
+
+<!-- ══ PHOTO GRID ══ -->
+<section id="photos">
+  <div class="pg-item rv">
+    <img src="barber-shave.jpg" alt="Royal Shave" id="pg-par"/>
+    <div class="pg-label">The Royal Shave</div>
+    <div class="pg-num">01 / 04</div>
+  </div>
+  <div class="pg-item rv d1">
+    <img src="barber-pole.jpg" alt="Barber Pole"/>
+    <div class="pg-label">The Symbol</div>
+    <div class="pg-num">02 / 04</div>
+  </div>
+  <div class="pg-item rv d2">
+    <img src="barber-shop.jpg" alt="The Shop"/>
+    <div class="pg-label">The Shop</div>
+    <div class="pg-num">03 / 04</div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ══ -->
+<section id="services">
+  <div class="sv-head">
+    <div>
+      <div class="sv-eye rv">What We Do</div>
+      <h2 class="sv-title rv d1">Our <em>Services</em></h2>
+    </div>
+  </div>
+  <div class="sv-rows">
+    <div class="sv-row rv" data-img="barber-shave.jpg">
+      <span class="sv-n">01</span>
+      <span class="sv-name">Classic Cut</span>
+      <div class="sv-tags"><span class="sv-tag">45 min</span><span class="sv-tag">Hair</span></div>
+      <span class="sv-price">$45</span>
+    </div>
+    <div class="sv-row rv d1" data-img="barber-tools.jpg">
+      <span class="sv-n">02</span>
+      <span class="sv-name">Royal Shave</span>
+      <div class="sv-tags"><span class="sv-tag">60 min</span><span class="sv-tag">Shave</span></div>
+      <span class="sv-price">$65</span>
+    </div>
+    <div class="sv-row rv d2" data-img="barber-shop.jpg">
+      <span class="sv-n">03</span>
+      <span class="sv-name">Beard Sculpt</span>
+      <div class="sv-tags"><span class="sv-tag">30 min</span><span class="sv-tag">Beard</span></div>
+      <span class="sv-price">$35</span>
+    </div>
+    <div class="sv-row rv d3" data-img="barber-pole.jpg">
+      <span class="sv-n">04</span>
+      <span class="sv-name">The Full Works</span>
+      <div class="sv-tags"><span class="sv-tag">90 min</span><span class="sv-tag">Premium</span></div>
+      <span class="sv-price">$120</span>
+    </div>
+    <div class="sv-row rv d4" data-img="barber-shave.jpg">
+      <span class="sv-n">05</span>
+      <span class="sv-name">King's Pass</span>
+      <div class="sv-tags"><span class="sv-tag">Monthly</span><span class="sv-tag">Members</span></div>
+      <span class="sv-price">$99/mo</span>
+    </div>
+  </div>
+</section>
+<div id="sv-float"><img src="barber-shave.jpg" alt=""/></div>
+
+<!-- ══ PINNED PHRASE ══ -->
+<section id="pinned">
+  <div class="pin-outer">
+    <div class="pin-inner">
+      <div class="pin-text" id="pin-text">
+        <span class="pw">Every</span>
+        <span class="pw blue">king</span>
+        <span class="pw">deserves</span>
+        <span class="pw">a</span>
+        <span class="pw blue">cut</span>
+        <span class="pw">that</span>
+        <span class="pw">makes</span>
+        <span class="pw">them</span>
+        <span class="pw blue">feel</span>
+        <span class="pw">unstoppable.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VIDEO SECTION ══ -->
+<section id="vid-section">
+  <video id="vid2" autoplay muted loop playsinline>
+    <source src="barber-hero.mp4" type="video/mp4">
+  </video>
+  <div class="vid-overlay"></div>
+  <div class="vid-content">
+    <div class="vid-eye rv">The Craft</div>
+    <h2 class="vid-title rv d1">Precision Is <em>Everything</em></h2>
+    <p class="vid-body rv d2">Every line, every edge, every fade is done with intention. Our barbers train for years before they touch a client's hair. That is the Kings Cut standard.</p>
+  </div>
+</section>
+
+<!-- ══ BIG CTA ══ -->
+<section id="bigcta">
+  <div class="bc-ghost">BOOK</div>
+  <p class="bc-pre rv">Ready to look like royalty?</p>
+  <h2 class="bc-title rv d1">Let's Work<br><span>Together.</span></h2>
+  <a href="tel:+15145550147" class="bc-btn magnetic rv d2">Reserve Your Chair</a>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div>
+    <div class="ft-brand">Kings <span>Cut</span></div>
+    <p class="ft-desc">Montreal's premier barbershop. Precision cuts, hot towel shaves, beard sculpting since 2012.</p>
+  </div>
+  <div>
+    <div class="ft-col-t">Navigate</div>
+    <ul class="ft-links">
+      <li><a href="#statement">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#vid-section">Gallery</a></li>
+      <li><a href="#bigcta">Book Now</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="ft-col-t">Services</div>
+    <ul class="ft-links">
+      <li><a href="#">Classic Cut</a></li>
+      <li><a href="#">Royal Shave</a></li>
+      <li><a href="#">Beard Sculpt</a></li>
+      <li><a href="#">King's Pass</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="ft-col-t">Contact</div>
+    <ul class="ft-links">
+      <li><a href="#">1247 Ste-Catherine O.</a></li>
+      <li><a href="#">Montréal, QC</a></li>
+      <li><a href="#">+1 (514) 555-0147</a></li>
+      <li><a href="#">info@kingscut.ca</a></li>
+    </ul>
+  </div>
+  <div class="ft-bot">
+    <p class="ft-copy">© 2025 Kings Cut Barbershop. All rights reserved.</p>
+    <div class="ft-soc">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Google</a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- end #s -->
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ══ MATH ══
+const clamp=(v,a,b)=>Math.min(Math.max(v,a),b);
+const lerp=(a,b,t)=>a+(b-a)*t;
+const lerpFR=(tgt,cur,alpha)=>{
+  const n=1-Math.exp(Math.log(1-clamp(alpha,0,.9999)));
+  return lerp(cur,tgt,n);
+};
+
+// ══ SMOOTH SCROLL ══
+const sc={cur:0,tgt:0,vel:0,prev:0};
+const wrap=document.getElementById('s');
+function smoothScroll(){
+  requestAnimationFrame(smoothScroll);
+  const maxS=wrap.scrollHeight-window.innerHeight;
+  sc.tgt=clamp(sc.tgt,0,maxS);
+  sc.cur+=(sc.tgt-sc.cur)*.09;
+  sc.vel=sc.cur-sc.prev;sc.prev=sc.cur;
+  wrap.style.transform=`translateY(${-sc.cur}px)`;
+  ScrollTrigger.update();
+  // video speed reacts to scroll velocity
+  const vid=document.getElementById('hero-video');
+  if(vid){vid.playbackRate=clamp(1+Math.abs(sc.vel)*.04,1,2.5);}
+}
+smoothScroll();
+
+window.addEventListener('wheel',e=>{e.preventDefault();sc.tgt+=e.deltaY;},{passive:false});
+let ts=0;
+window.addEventListener('touchstart',e=>ts=e.touches[0].clientY,{passive:true});
+window.addEventListener('touchmove',e=>{sc.tgt+=(ts-e.touches[0].clientY)*2;ts=e.touches[0].clientY;},{passive:true});
+
+ScrollTrigger.scrollerProxy(document.body,{
+  scrollTop(val){if(arguments.length){sc.cur=val;sc.tgt=val;}return sc.cur;},
+  getBoundingClientRect(){return{top:0,left:0,width:window.innerWidth,height:window.innerHeight};}
+});
+
+// ══ LOADER ══
+(()=>{
+  const prog=document.getElementById('ldr-prog');
+  const num=document.getElementById('ldr-num');
+  const lsplit=document.querySelectorAll('.ldr-split');
+  let p=0;
+  const iv=setInterval(()=>{
+    p+=Math.random()*12+4;
+    if(p>=100){p=100;clearInterval(iv);setTimeout(reveal,300);}
+    prog.style.width=p+'%';
+    num.textContent=Math.floor(p);
+  },60);
+  function reveal(){
+    gsap.to('#ldr-logo,#ldr-num,#ldr-line,#ldr-tag',{opacity:0,duration:.4,ease:'power2.in'});
+    gsap.to(lsplit[0],{x:'-100%',duration:.9,ease:'power4.inOut',delay:.3});
+    gsap.to(lsplit[1],{x:'100%',duration:.9,ease:'power4.inOut',delay:.3,onComplete:()=>{
+      document.getElementById('ldr').style.display='none';
+      startAnims();
+    }});
+  }
+})();
+
+function startAnims(){
+  gsap.to('.h-title-word',{y:0,duration:1.3,ease:'power4.out',stagger:.1,delay:.05});
+  gsap.to('.h-tag',{opacity:1,duration:.8,delay:.4,ease:'power3.out'});
+  gsap.to('.h-bottom',{opacity:1,duration:.8,delay:.8,ease:'power3.out'});
+  gsap.to('.h-scroll',{opacity:1,duration:.8,delay:1.1});
+  setTimeout(countStats,1400);
+}
+
+function countStats(){
+  document.querySelectorAll('.sn[data-target]').forEach(el=>{
+    const target=parseFloat(el.dataset.target);
+    const suffix=el.dataset.suffix||'';
+    const prefix=el.dataset.prefix||'';
+    const isD=String(target).includes('.');
+    let start=null;
+    (function step(ts){
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/1600,1);
+      const e=p<.5?4*p*p*p:(p-1)*(2*p-2)*(2*p-2)+1;
+      el.textContent=prefix+(isD?(e*target).toFixed(1):Math.floor(e*target))+suffix;
+      if(p<1)requestAnimationFrame(step);
+      else el.textContent=prefix+target+suffix;
+    })(performance.now());
+  });
+}
+
+// ══ CURSOR ══
+(()=>{
+  const dot=document.getElementById('cd');
+  const ring=document.getElementById('cr');
+  const N=10;const trails=[];
+  for(let i=0;i<N;i++){
+    const d=document.createElement('div');d.className='tr';
+    const s=Math.max(2,5*(1-i/N));
+    d.style.cssText=`width:${s}px;height:${s}px;opacity:0;`;
+    document.body.appendChild(d);
+    trails.push({el:d,x:0,y:0});
+  }
+  const m={x:0,y:0};const dp={x:0,y:0};const rp={x:0,y:0};
+  let px=0,py=0;
+  document.addEventListener('mousemove',e=>{m.x=e.clientX;m.y=e.clientY;});
+  (function tick(){
+    requestAnimationFrame(tick);
+    const vx=m.x-px,vy=m.y-py;
+    px+=(m.x-px)*.3;py+=(m.y-py)*.3;
+    const spd=Math.sqrt(vx*vx+vy*vy);
+    const ang=Math.atan2(vy,vx);
+    dp.x+=(m.x-dp.x)*.4;dp.y+=(m.y-dp.y)*.4;
+    dot.style.left=dp.x+'px';dot.style.top=dp.y+'px';
+    rp.x+=(m.x-rp.x)*.1;rp.y+=(m.y-rp.y)*.1;
+    const st=Math.min(spd*.6,16);
+    ring.style.left=rp.x+'px';ring.style.top=rp.y+'px';
+    ring.style.width=(44+st)+'px';ring.style.height=Math.max(44-st*.3,28)+'px';
+    ring.style.transform=`translate(-50%,-50%) rotate(${ang}rad)`;
+    trails[0].x=dp.x;trails[0].y=dp.y;
+    for(let i=N-1;i>0;i--){trails[i].x+=(trails[i-1].x-trails[i].x)*.32;trails[i].y+=(trails[i-1].y-trails[i].y)*.32;}
+    const fd=clamp(spd/5,0,1);
+    trails.forEach((t,i)=>{
+      t.el.style.left=t.x+'px';t.el.style.top=t.y+'px';
+      t.el.style.opacity=((1-i/N)*.5*fd).toFixed(3);
+    });
+  })();
+  document.querySelectorAll('a,button,.sv-row,.pg-item,.mq-i').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+  });
+})();
+
+// ══ MAGNETIC ══
+document.querySelectorAll('.magnetic').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{
+    const r=btn.getBoundingClientRect();
+    btn.style.transform=`translate(${(e.clientX-(r.left+r.width/2))*.35}px,${(e.clientY-(r.top+r.height/2))*.35}px)`;
+    btn.style.transition='transform .1s';
+  });
+  btn.addEventListener('mouseleave',()=>{btn.style.transform='';btn.style.transition='transform .5s cubic-bezier(.16,1,.3,1)';});
+});
+
+// ══ SCROLL REVEAL ══
+const rvO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');rvO.unobserve(e.target);}});
+},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>rvO.observe(el));
+
+// ══ STATEMENT WORDS ══
+ScrollTrigger.create({
+  trigger:'#statement',scroller:document.body,start:'top 65%',
+  onEnter:()=>gsap.to('.stmt-big .wi',{y:0,duration:1.1,ease:'power4.out',stagger:.05})
+});
+
+// ══ PARALLAX PHOTO ══
+gsap.to('#pg-par',{
+  y:-80,ease:'none',
+  scrollTrigger:{trigger:'#photos',scroller:document.body,start:'top bottom',end:'bottom top',scrub:1}
+});
+
+// ══ VIDEO PARALLAX ══
+gsap.to('#vid2',{
+  scale:1.12,ease:'none',
+  scrollTrigger:{trigger:'#vid-section',scroller:document.body,start:'top bottom',end:'bottom top',scrub:1}
+});
+
+// ══ SERVICE HOVER FLOAT ══
+(()=>{
+  const fl=document.getElementById('sv-float');
+  const img=fl.querySelector('img');
+  let mx=0,my=0,fx=0,fy=0,vis=false;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function tick(){requestAnimationFrame(tick);if(!vis)return;fx+=(mx+28-fx)*.12;fy+=(my-90-fy)*.12;fl.style.left=fx+'px';fl.style.top=fy+'px';})();
+  document.querySelectorAll('.sv-row').forEach(row=>{
+    row.addEventListener('mouseenter',()=>{img.src=row.dataset.img||'barber-shave.jpg';fl.style.opacity='1';vis=true;});
+    row.addEventListener('mouseleave',()=>{fl.style.opacity='0';vis=false;});
+  });
+})();
+
+// ══ PINNED SCROLL PHRASE ══
+(()=>{
+  const words=document.querySelectorAll('.pw');
+  ScrollTrigger.create({
+    trigger:'#pinned',scroller:document.body,
+    start:'top top',end:'bottom bottom',scrub:1,
+    onUpdate(self){
+      const p=self.progress;
+      words.forEach((w,i)=>{w.classList.toggle('on',p>=i/(words.length-1)*.92);});
+    }
+  });
+})();
+
+// ══ GSAP PARALLAX GALLERY ══
+gsap.utils.toArray('.pg-item img').forEach((img,i)=>{
+  gsap.to(img,{
+    y:i%2===0?-40:40,ease:'none',
+    scrollTrigger:{trigger:img.closest('.pg-item'),scroller:document.body,start:'top bottom',end:'bottom top',scrub:1}
+  });
+});
+</script>
+</body>
+</html>
